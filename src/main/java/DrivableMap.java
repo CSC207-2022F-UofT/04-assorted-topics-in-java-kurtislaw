@@ -7,10 +7,8 @@
  * created the constructor for you already.
  */
 
-import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 class DrivableMap {
     HashMap<String, Drivable> drivable_map;
@@ -29,11 +27,7 @@ class DrivableMap {
      *       Return true if the Drivable was added to drivable_map.
      */
     public boolean addDrivable(String id, Drivable obj) {
-        if (drivable_map.get(id) == null) {
-            drivable_map.put(id, obj);
-            return true;
-        }
-        return false;
+        return drivable_map.putIfAbsent(id, obj) == null;
     }
 
 
@@ -63,7 +57,7 @@ class DrivableMap {
      *       drivable_map.
      */
     public ArrayList<Tradable> getTradable() {
-        ArrayList<Tradable> allTradeableItems = new ArrayList<Tradable>();
+        ArrayList<Tradable> allTradeableItems = new ArrayList<>();
 
         for (Drivable obj : drivable_map.values()) {
             if (obj instanceof Tradable) {
